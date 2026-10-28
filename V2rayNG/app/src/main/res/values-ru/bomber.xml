@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="bomber_home">Главная</string>
+    <string name="bomber_help">Помощь</string>
+    <string name="bomber_connected">Подключено</string>
+    <string name="bomber_disconnected">Готов к подключению</string>
+    <string name="bomber_disconnect">Отключить</string>
+    <string name="bomber_connect">Подключить</string>
+    <string name="bomber_choose_server">Выбрать сервер</string>
+    <string name="bomber_first_connection">Скопируйте ссылку подписки из BomberVPN, добавьте её ниже и выберите сервер.</string>
+    <string name="bomber_subscription">Ваша подписка</string>
+    <string name="bomber_import">Добавить из буфера</string>
+    <string name="bomber_scan">Сканировать QR-код</string>
+    <string name="bomber_account">Открыть мой BomberVPN</string>
+    <string name="bomber_help_title">Вернём подключение</string>
+    <string name="bomber_help_intro">Пройдите шаги по порядку. Результат проверки появится здесь.</string>
+    <string name="bomber_refresh_hint">Обновите подписку, чтобы получить актуальные серверы и настройки.</string>
+    <string name="bomber_refresh">Обновить подписку</string>
+    <string name="bomber_test_hint">Подключитесь к серверу и проверьте, проходит ли трафик в интернет.</string>
+    <string name="bomber_test">Проверить соединение</string>
+    <string name="bomber_network_hint">Если проверка не прошла, смените сервер или сеть: Wi-Fi и мобильный интернет. Проверьте, какие приложения используют VPN.</string>
+    <string name="bomber_apps">Приложения через VPN</string>
+    <string name="bomber_logs">Открыть журнал диагностики</string>
+    <string name="bomber_support">Написать в поддержку</string>
+    <string name="bomber_privacy_hint">Не отправляйте ссылку подписки или конфигурацию в публичный чат.</string>
+    <string name="bomber_servers">Серверы</string>
+    <string name="bomber_selected_server">Выбранный сервер</string>
+    <string name="bomber_setup">Добавьте подписку</string>
+</resources>

@@ -1,3 +1,38 @@
+# Bomber VPN for Android
+
+Нативный Android-клиент BomberVPN на базе [v2rayNG](https://github.com/2dust/v2rayNG).
+Отдельный пакет `cc.bmbrvpn.android`; можно установить рядом с v2rayNG.
+
+- Главная: подключение, выбранный сервер, импорт подписки из буфера или QR.
+- Серверы: группы подписок и все редакторы профилей upstream.
+- Помощь: обновление подписки, проверка соединения, выбор приложений и поддержка.
+- Material 3: фирменные светлая/тёмная темы, опциональные цвета обоев Android 12+, боковая навигация на широком экране.
+- Ссылки `bombervpn://install-sub?url=<percent-encoded URL>`; совместимость с `v2rayng://` сохранена.
+
+Аккаунт: [Telegram-бот](https://t.me/openbomber_vpn_bot). Поддержка: [openbomber_support](https://t.me/openbomber_support).
+Русский и английский — основные языки новых экранов; для остальных языков новые строки пока используют английский.
+
+## Сборка
+
+Инициализируйте submodules командой `git submodule update --init --recursive`.
+Версии Android SDK/NDK/JDK закреплены в `.github/workflows/bombervpn.yml`.
+
+1. Установите SDK и задайте `ANDROID_HOME`, `NDK_HOME`.
+2. Выполните `bash compile-hevtun.sh`, затем скопируйте `libs/.` в `V2rayNG/app/libs/`.
+3. Скачайте `libv2ray.aar` из релиза `2dust/AndroidLibXrayLite`, соответствующего **точному** тегу `git -C AndroidLibXrayLite describe --tags --exact-match`, в `V2rayNG/app/libs/`.
+4. Из `V2rayNG` выполните `./gradlew :app:testPlaystoreDebugUnitTest :app:lintPlaystoreDebug :app:assemblePlaystoreDebug`.
+
+APK: `V2rayNG/app/build/outputs/apk/playstore/debug/`. Для большинства современных телефонов — `arm64-v8a`; `universal` содержит все четыре ABI.
+CI собирает и проверяет Play Store и F-Droid варианты и сохраняет debug APK как артефакты. Debug-сборки предназначены для проверки; это не production-подпись. Workflow подписанного релиза запускается вручную с ключом владельца в GitHub Secrets.
+
+## Происхождение и лицензия
+
+Это самостоятельный форк, а не официальный релиз команды v2rayNG. Исходный код и лицензия GPL-3.0 сохранены; распространение изменённых бинарников сопровождается исходниками этого репозитория. Ядро Xray и HEV берутся из закреплённых upstream submodules без изменений.
+
+---
+
+## Upstream documentation
+
 # v2rayNG
 
 A V2Ray client for Android, support [Xray core](https://github.com/XTLS/Xray-core) and [v2fly core](https://github.com/v2fly/v2ray-core)

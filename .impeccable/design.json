@@ -1,0 +1,850 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-10-28T19:13:10.824391+00:00",
+  "title": "Design System: BomberVPN Android",
+  "extensions": {
+    "colorMeta": {
+      "mist-primary": {
+        "role": "primary",
+        "displayName": "Mist Primary",
+        "tonalRamp": [
+          "oklch(15.00% 0.11903 65.12)",
+          "oklch(26.43% 0.11903 65.12)",
+          "oklch(37.86% 0.11903 65.12)",
+          "oklch(49.29% 0.11903 65.12)",
+          "oklch(60.71% 0.11903 65.12)",
+          "oklch(72.14% 0.11903 65.12)",
+          "oklch(83.57% 0.11903 65.12)",
+          "oklch(95.00% 0.11903 65.12)"
+        ]
+      },
+      "mist-on-primary": {
+        "role": "primary",
+        "displayName": "Mist On Primary",
+        "tonalRamp": [
+          "oklch(15.00% 0.00000 89.88)",
+          "oklch(26.43% 0.00000 89.88)",
+          "oklch(37.86% 0.00000 89.88)",
+          "oklch(49.29% 0.00000 89.88)",
+          "oklch(60.71% 0.00000 89.88)",
+          "oklch(72.14% 0.00000 89.88)",
+          "oklch(83.57% 0.00000 89.88)",
+          "oklch(95.00% 0.00000 89.88)"
+        ]
+      },
+      "mist-primary-container": {
+        "role": "primary",
+        "displayName": "Mist Primary Container",
+        "tonalRamp": [
+          "oklch(15.00% 0.06846 73.93)",
+          "oklch(26.43% 0.06846 73.93)",
+          "oklch(37.86% 0.06846 73.93)",
+          "oklch(49.29% 0.06846 73.93)",
+          "oklch(60.71% 0.06846 73.93)",
+          "oklch(72.14% 0.06846 73.93)",
+          "oklch(83.57% 0.06846 73.93)",
+          "oklch(95.00% 0.06846 73.93)"
+        ]
+      },
+      "mist-on-primary-container": {
+        "role": "primary",
+        "displayName": "Mist On Primary Container",
+        "tonalRamp": [
+          "oklch(15.00% 0.05293 70.11)",
+          "oklch(26.43% 0.05293 70.11)",
+          "oklch(37.86% 0.05293 70.11)",
+          "oklch(49.29% 0.05293 70.11)",
+          "oklch(60.71% 0.05293 70.11)",
+          "oklch(72.14% 0.05293 70.11)",
+          "oklch(83.57% 0.05293 70.11)",
+          "oklch(95.00% 0.05293 70.11)"
+        ]
+      },
+      "mist-secondary": {
+        "role": "secondary",
+        "displayName": "Mist Secondary",
+        "tonalRamp": [
+          "oklch(15.00% 0.04120 269.43)",
+          "oklch(26.43% 0.04120 269.43)",
+          "oklch(37.86% 0.04120 269.43)",
+          "oklch(49.29% 0.04120 269.43)",
+          "oklch(60.71% 0.04120 269.43)",
+          "oklch(72.14% 0.04120 269.43)",
+          "oklch(83.57% 0.04120 269.43)",
+          "oklch(95.00% 0.04120 269.43)"
+        ]
+      },
+      "mist-on-secondary": {
+        "role": "secondary",
+        "displayName": "Mist On Secondary",
+        "tonalRamp": [
+          "oklch(15.00% 0.00000 89.88)",
+          "oklch(26.43% 0.00000 89.88)",
+          "oklch(37.86% 0.00000 89.88)",
+          "oklch(49.29% 0.00000 89.88)",
+          "oklch(60.71% 0.00000 89.88)",
+          "oklch(72.14% 0.00000 89.88)",
+          "oklch(83.57% 0.00000 89.88)",
+          "oklch(95.00% 0.00000 89.88)"
+        ]
+      },
+      "mist-secondary-container": {
+        "role": "secondary",
+        "displayName": "Mist Secondary Container",
+        "tonalRamp": [
+          "oklch(15.00% 0.01165 264.51)",
+          "oklch(26.43% 0.01165 264.51)",
+          "oklch(37.86% 0.01165 264.51)",
+          "oklch(49.29% 0.01165 264.51)",
+          "oklch(60.71% 0.01165 264.51)",
+          "oklch(72.14% 0.01165 264.51)",
+          "oklch(83.57% 0.01165 264.51)",
+          "oklch(95.00% 0.01165 264.51)"
+        ]
+      },
+      "mist-on-secondary-container": {
+        "role": "secondary",
+        "displayName": "Mist On Secondary Container",
+        "tonalRamp": [
+          "oklch(15.00% 0.04574 269.78)",
+          "oklch(26.43% 0.04574 269.78)",
+          "oklch(37.86% 0.04574 269.78)",
+          "oklch(49.29% 0.04574 269.78)",
+          "oklch(60.71% 0.04574 269.78)",
+          "oklch(72.14% 0.04574 269.78)",
+          "oklch(83.57% 0.04574 269.78)",
+          "oklch(95.00% 0.04574 269.78)"
+        ]
+      },
+      "mist-tertiary": {
+        "role": "tertiary",
+        "displayName": "Mist Tertiary",
+        "tonalRamp": [
+          "oklch(15.00% 0.11875 155.58)",
+          "oklch(26.43% 0.11875 155.58)",
+          "oklch(37.86% 0.11875 155.58)",
+          "oklch(49.29% 0.11875 155.58)",
+          "oklch(60.71% 0.11875 155.58)",
+          "oklch(72.14% 0.11875 155.58)",
+          "oklch(83.57% 0.11875 155.58)",
+          "oklch(95.00% 0.11875 155.58)"
+        ]
+      },
+      "mist-on-tertiary": {
+        "role": "tertiary",
+        "displayName": "Mist On Tertiary",
+        "tonalRamp": [
+          "oklch(15.00% 0.00000 89.88)",
+          "oklch(26.43% 0.00000 89.88)",
+          "oklch(37.86% 0.00000 89.88)",
+          "oklch(49.29% 0.00000 89.88)",
+          "oklch(60.71% 0.00000 89.88)",
+          "oklch(72.14% 0.00000 89.88)",
+          "oklch(83.57% 0.00000 89.88)",
+          "oklch(95.00% 0.00000 89.88)"
+        ]
+      },
+      "mist-background": {
+        "role": "neutral",
+        "displayName": "Mist Background",
+        "tonalRamp": [
+          "oklch(15.00% 0.00743 260.73)",
+          "oklch(26.43% 0.00743 260.73)",
+          "oklch(37.86% 0.00743 260.73)",
+          "oklch(49.29% 0.00743 260.73)",
+          "oklch(60.71% 0.00743 260.73)",
+          "oklch(72.14% 0.00743 260.73)",
+          "oklch(83.57% 0.00743 260.73)",
+          "oklch(95.00% 0.00743 260.73)"
+        ]
+      },
+      "mist-on-background": {
+        "role": "neutral",
+        "displayName": "Mist On Background",
+        "tonalRamp": [
+          "oklch(15.00% 0.03629 267.99)",
+          "oklch(26.43% 0.03629 267.99)",
+          "oklch(37.86% 0.03629 267.99)",
+          "oklch(49.29% 0.03629 267.99)",
+          "oklch(60.71% 0.03629 267.99)",
+          "oklch(72.14% 0.03629 267.99)",
+          "oklch(83.57% 0.03629 267.99)",
+          "oklch(95.00% 0.03629 267.99)"
+        ]
+      },
+      "mist-surface": {
+        "role": "neutral",
+        "displayName": "Mist Surface",
+        "tonalRamp": [
+          "oklch(15.00% 0.00000 89.88)",
+          "oklch(26.43% 0.00000 89.88)",
+          "oklch(37.86% 0.00000 89.88)",
+          "oklch(49.29% 0.00000 89.88)",
+          "oklch(60.71% 0.00000 89.88)",
+          "oklch(72.14% 0.00000 89.88)",
+          "oklch(83.57% 0.00000 89.88)",
+          "oklch(95.00% 0.00000 89.88)"
+        ]
+      },
+      "mist-on-surface": {
+        "role": "neutral",
+        "displayName": "Mist On Surface",
+        "tonalRamp": [
+          "oklch(15.00% 0.03629 267.99)",
+          "oklch(26.43% 0.03629 267.99)",
+          "oklch(37.86% 0.03629 267.99)",
+          "oklch(49.29% 0.03629 267.99)",
+          "oklch(60.71% 0.03629 267.99)",
+          "oklch(72.14% 0.03629 267.99)",
+          "oklch(83.57% 0.03629 267.99)",
+          "oklch(95.00% 0.03629 267.99)"
+        ]
+      },
+      "mist-surface-variant": {
+        "role": "neutral",
+        "displayName": "Mist Surface Variant",
+        "tonalRamp": [
+          "oklch(15.00% 0.01165 264.51)",
+          "oklch(26.43% 0.01165 264.51)",
+          "oklch(37.86% 0.01165 264.51)",
+          "oklch(49.29% 0.01165 264.51)",
+          "oklch(60.71% 0.01165 264.51)",
+          "oklch(72.14% 0.01165 264.51)",
+          "oklch(83.57% 0.01165 264.51)",
+          "oklch(95.00% 0.01165 264.51)"
+        ]
+      },
+      "mist-on-surface-variant": {
+        "role": "neutral",
+        "displayName": "Mist On Surface Variant",
+        "tonalRamp": [
+          "oklch(15.00% 0.04120 269.43)",
+          "oklch(26.43% 0.04120 269.43)",
+          "oklch(37.86% 0.04120 269.43)",
+          "oklch(49.29% 0.04120 269.43)",
+          "oklch(60.71% 0.04120 269.43)",
+          "oklch(72.14% 0.04120 269.43)",
+          "oklch(83.57% 0.04120 269.43)",
+          "oklch(95.00% 0.04120 269.43)"
+        ]
+      },
+      "mist-outline": {
+        "role": "neutral",
+        "displayName": "Mist Outline",
+        "tonalRamp": [
+          "oklch(15.00% 0.03571 265.97)",
+          "oklch(26.43% 0.03571 265.97)",
+          "oklch(37.86% 0.03571 265.97)",
+          "oklch(49.29% 0.03571 265.97)",
+          "oklch(60.71% 0.03571 265.97)",
+          "oklch(72.14% 0.03571 265.97)",
+          "oklch(83.57% 0.03571 265.97)",
+          "oklch(95.00% 0.03571 265.97)"
+        ]
+      },
+      "mist-outline-variant": {
+        "role": "neutral",
+        "displayName": "Mist Outline Variant",
+        "tonalRamp": [
+          "oklch(15.00% 0.01165 264.51)",
+          "oklch(26.43% 0.01165 264.51)",
+          "oklch(37.86% 0.01165 264.51)",
+          "oklch(49.29% 0.01165 264.51)",
+          "oklch(60.71% 0.01165 264.51)",
+          "oklch(72.14% 0.01165 264.51)",
+          "oklch(83.57% 0.01165 264.51)",
+          "oklch(95.00% 0.01165 264.51)"
+        ]
+      },
+      "mist-surface-container-lowest": {
+        "role": "neutral",
+        "displayName": "Mist Surface Container Lowest",
+        "tonalRamp": [
+          "oklch(15.00% 0.00000 89.88)",
+          "oklch(26.43% 0.00000 89.88)",
+          "oklch(37.86% 0.00000 89.88)",
+          "oklch(49.29% 0.00000 89.88)",
+          "oklch(60.71% 0.00000 89.88)",
+          "oklch(72.14% 0.00000 89.88)",
+          "oklch(83.57% 0.00000 89.88)",
+          "oklch(95.00% 0.00000 89.88)"
+        ]
+      },
+      "mist-surface-container-low": {
+        "role": "neutral",
+        "displayName": "Mist Surface Container Low",
+        "tonalRamp": [
+          "oklch(15.00% 0.00453 258.32)",
+          "oklch(26.43% 0.00453 258.32)",
+          "oklch(37.86% 0.00453 258.32)",
+          "oklch(49.29% 0.00453 258.32)",
+          "oklch(60.71% 0.00453 258.32)",
+          "oklch(72.14% 0.00453 258.32)",
+          "oklch(83.57% 0.00453 258.32)",
+          "oklch(95.00% 0.00453 258.32)"
+        ]
+      },
+      "mist-surface-container": {
+        "role": "neutral",
+        "displayName": "Mist Surface Container",
+        "tonalRamp": [
+          "oklch(15.00% 0.00743 260.73)",
+          "oklch(26.43% 0.00743 260.73)",
+          "oklch(37.86% 0.00743 260.73)",
+          "oklch(49.29% 0.00743 260.73)",
+          "oklch(60.71% 0.00743 260.73)",
+          "oklch(72.14% 0.00743 260.73)",
+          "oklch(83.57% 0.00743 260.73)",
+          "oklch(95.00% 0.00743 260.73)"
+        ]
+      },
+      "mist-surface-container-high": {
+        "role": "neutral",
+        "displayName": "Mist Surface Container High",
+        "tonalRamp": [
+          "oklch(15.00% 0.01165 264.51)",
+          "oklch(26.43% 0.01165 264.51)",
+          "oklch(37.86% 0.01165 264.51)",
+          "oklch(49.29% 0.01165 264.51)",
+          "oklch(60.71% 0.01165 264.51)",
+          "oklch(72.14% 0.01165 264.51)",
+          "oklch(83.57% 0.01165 264.51)",
+          "oklch(95.00% 0.01165 264.51)"
+        ]
+      },
+      "mist-surface-container-highest": {
+        "role": "neutral",
+        "displayName": "Mist Surface Container Highest",
+        "tonalRamp": [
+          "oklch(15.00% 0.01512 260.73)",
+          "oklch(26.43% 0.01512 260.73)",
+          "oklch(37.86% 0.01512 260.73)",
+          "oklch(49.29% 0.01512 260.73)",
+          "oklch(60.71% 0.01512 260.73)",
+          "oklch(72.14% 0.01512 260.73)",
+          "oklch(83.57% 0.01512 260.73)",
+          "oklch(95.00% 0.01512 260.73)"
+        ]
+      },
+      "mist-error": {
+        "role": "neutral",
+        "displayName": "Mist Error",
+        "tonalRamp": [
+          "oklch(15.00% 0.17647 28.56)",
+          "oklch(26.43% 0.17647 28.56)",
+          "oklch(37.86% 0.17647 28.56)",
+          "oklch(49.29% 0.17647 28.56)",
+          "oklch(60.71% 0.17647 28.56)",
+          "oklch(72.14% 0.17647 28.56)",
+          "oklch(83.57% 0.17647 28.56)",
+          "oklch(95.00% 0.17647 28.56)"
+        ]
+      },
+      "mist-on-error": {
+        "role": "neutral",
+        "displayName": "Mist On Error",
+        "tonalRamp": [
+          "oklch(15.00% 0.00000 89.88)",
+          "oklch(26.43% 0.00000 89.88)",
+          "oklch(37.86% 0.00000 89.88)",
+          "oklch(49.29% 0.00000 89.88)",
+          "oklch(60.71% 0.00000 89.88)",
+          "oklch(72.14% 0.00000 89.88)",
+          "oklch(83.57% 0.00000 89.88)",
+          "oklch(95.00% 0.00000 89.88)"
+        ]
+      },
+      "ink-primary": {
+        "role": "primary",
+        "displayName": "Ink Primary",
+        "tonalRamp": [
+          "oklch(15.00% 0.16041 73.81)",
+          "oklch(26.43% 0.16041 73.81)",
+          "oklch(37.86% 0.16041 73.81)",
+          "oklch(49.29% 0.16041 73.81)",
+          "oklch(60.71% 0.16041 73.81)",
+          "oklch(72.14% 0.16041 73.81)",
+          "oklch(83.57% 0.16041 73.81)",
+          "oklch(95.00% 0.16041 73.81)"
+        ]
+      },
+      "ink-on-primary": {
+        "role": "primary",
+        "displayName": "Ink On Primary",
+        "tonalRamp": [
+          "oklch(15.00% 0.02961 81.93)",
+          "oklch(26.43% 0.02961 81.93)",
+          "oklch(37.86% 0.02961 81.93)",
+          "oklch(49.29% 0.02961 81.93)",
+          "oklch(60.71% 0.02961 81.93)",
+          "oklch(72.14% 0.02961 81.93)",
+          "oklch(83.57% 0.02961 81.93)",
+          "oklch(95.00% 0.02961 81.93)"
+        ]
+      },
+      "ink-primary-container": {
+        "role": "primary",
+        "displayName": "Ink Primary Container",
+        "tonalRamp": [
+          "oklch(15.00% 0.08001 70.40)",
+          "oklch(26.43% 0.08001 70.40)",
+          "oklch(37.86% 0.08001 70.40)",
+          "oklch(49.29% 0.08001 70.40)",
+          "oklch(60.71% 0.08001 70.40)",
+          "oklch(72.14% 0.08001 70.40)",
+          "oklch(83.57% 0.08001 70.40)",
+          "oklch(95.00% 0.08001 70.40)"
+        ]
+      },
+      "ink-on-primary-container": {
+        "role": "primary",
+        "displayName": "Ink On Primary Container",
+        "tonalRamp": [
+          "oklch(15.00% 0.06846 73.93)",
+          "oklch(26.43% 0.06846 73.93)",
+          "oklch(37.86% 0.06846 73.93)",
+          "oklch(49.29% 0.06846 73.93)",
+          "oklch(60.71% 0.06846 73.93)",
+          "oklch(72.14% 0.06846 73.93)",
+          "oklch(83.57% 0.06846 73.93)",
+          "oklch(95.00% 0.06846 73.93)"
+        ]
+      },
+      "ink-secondary": {
+        "role": "secondary",
+        "displayName": "Ink Secondary",
+        "tonalRamp": [
+          "oklch(15.00% 0.03069 269.07)",
+          "oklch(26.43% 0.03069 269.07)",
+          "oklch(37.86% 0.03069 269.07)",
+          "oklch(49.29% 0.03069 269.07)",
+          "oklch(60.71% 0.03069 269.07)",
+          "oklch(72.14% 0.03069 269.07)",
+          "oklch(83.57% 0.03069 269.07)",
+          "oklch(95.00% 0.03069 269.07)"
+        ]
+      },
+      "ink-on-secondary": {
+        "role": "secondary",
+        "displayName": "Ink On Secondary",
+        "tonalRamp": [
+          "oklch(15.00% 0.05596 270.12)",
+          "oklch(26.43% 0.05596 270.12)",
+          "oklch(37.86% 0.05596 270.12)",
+          "oklch(49.29% 0.05596 270.12)",
+          "oklch(60.71% 0.05596 270.12)",
+          "oklch(72.14% 0.05596 270.12)",
+          "oklch(83.57% 0.05596 270.12)",
+          "oklch(95.00% 0.05596 270.12)"
+        ]
+      },
+      "ink-secondary-container": {
+        "role": "secondary",
+        "displayName": "Ink Secondary Container",
+        "tonalRamp": [
+          "oklch(15.00% 0.05596 270.12)",
+          "oklch(26.43% 0.05596 270.12)",
+          "oklch(37.86% 0.05596 270.12)",
+          "oklch(49.29% 0.05596 270.12)",
+          "oklch(60.71% 0.05596 270.12)",
+          "oklch(72.14% 0.05596 270.12)",
+          "oklch(83.57% 0.05596 270.12)",
+          "oklch(95.00% 0.05596 270.12)"
+        ]
+      },
+      "ink-on-secondary-container": {
+        "role": "secondary",
+        "displayName": "Ink On Secondary Container",
+        "tonalRamp": [
+          "oklch(15.00% 0.00866 264.52)",
+          "oklch(26.43% 0.00866 264.52)",
+          "oklch(37.86% 0.00866 264.52)",
+          "oklch(49.29% 0.00866 264.52)",
+          "oklch(60.71% 0.00866 264.52)",
+          "oklch(72.14% 0.00866 264.52)",
+          "oklch(83.57% 0.00866 264.52)",
+          "oklch(95.00% 0.00866 264.52)"
+        ]
+      },
+      "ink-tertiary": {
+        "role": "tertiary",
+        "displayName": "Ink Tertiary",
+        "tonalRamp": [
+          "oklch(15.00% 0.16318 155.29)",
+          "oklch(26.43% 0.16318 155.29)",
+          "oklch(37.86% 0.16318 155.29)",
+          "oklch(49.29% 0.16318 155.29)",
+          "oklch(60.71% 0.16318 155.29)",
+          "oklch(72.14% 0.16318 155.29)",
+          "oklch(83.57% 0.16318 155.29)",
+          "oklch(95.00% 0.16318 155.29)"
+        ]
+      },
+      "ink-on-tertiary": {
+        "role": "tertiary",
+        "displayName": "Ink On Tertiary",
+        "tonalRamp": [
+          "oklch(15.00% 0.05188 157.04)",
+          "oklch(26.43% 0.05188 157.04)",
+          "oklch(37.86% 0.05188 157.04)",
+          "oklch(49.29% 0.05188 157.04)",
+          "oklch(60.71% 0.05188 157.04)",
+          "oklch(72.14% 0.05188 157.04)",
+          "oklch(83.57% 0.05188 157.04)",
+          "oklch(95.00% 0.05188 157.04)"
+        ]
+      },
+      "ink-background": {
+        "role": "neutral",
+        "displayName": "Ink Background",
+        "tonalRamp": [
+          "oklch(15.00% 0.03629 267.99)",
+          "oklch(26.43% 0.03629 267.99)",
+          "oklch(37.86% 0.03629 267.99)",
+          "oklch(49.29% 0.03629 267.99)",
+          "oklch(60.71% 0.03629 267.99)",
+          "oklch(72.14% 0.03629 267.99)",
+          "oklch(83.57% 0.03629 267.99)",
+          "oklch(95.00% 0.03629 267.99)"
+        ]
+      },
+      "ink-on-background": {
+        "role": "neutral",
+        "displayName": "Ink On Background",
+        "tonalRamp": [
+          "oklch(15.00% 0.00866 264.52)",
+          "oklch(26.43% 0.00866 264.52)",
+          "oklch(37.86% 0.00866 264.52)",
+          "oklch(49.29% 0.00866 264.52)",
+          "oklch(60.71% 0.00866 264.52)",
+          "oklch(72.14% 0.00866 264.52)",
+          "oklch(83.57% 0.00866 264.52)",
+          "oklch(95.00% 0.00866 264.52)"
+        ]
+      },
+      "ink-surface": {
+        "role": "neutral",
+        "displayName": "Ink Surface",
+        "tonalRamp": [
+          "oklch(15.00% 0.04574 269.78)",
+          "oklch(26.43% 0.04574 269.78)",
+          "oklch(37.86% 0.04574 269.78)",
+          "oklch(49.29% 0.04574 269.78)",
+          "oklch(60.71% 0.04574 269.78)",
+          "oklch(72.14% 0.04574 269.78)",
+          "oklch(83.57% 0.04574 269.78)",
+          "oklch(95.00% 0.04574 269.78)"
+        ]
+      },
+      "ink-on-surface": {
+        "role": "neutral",
+        "displayName": "Ink On Surface",
+        "tonalRamp": [
+          "oklch(15.00% 0.00866 264.52)",
+          "oklch(26.43% 0.00866 264.52)",
+          "oklch(37.86% 0.00866 264.52)",
+          "oklch(49.29% 0.00866 264.52)",
+          "oklch(60.71% 0.00866 264.52)",
+          "oklch(72.14% 0.00866 264.52)",
+          "oklch(83.57% 0.00866 264.52)",
+          "oklch(95.00% 0.00866 264.52)"
+        ]
+      },
+      "ink-surface-variant": {
+        "role": "neutral",
+        "displayName": "Ink Surface Variant",
+        "tonalRamp": [
+          "oklch(15.00% 0.05596 270.12)",
+          "oklch(26.43% 0.05596 270.12)",
+          "oklch(37.86% 0.05596 270.12)",
+          "oklch(49.29% 0.05596 270.12)",
+          "oklch(60.71% 0.05596 270.12)",
+          "oklch(72.14% 0.05596 270.12)",
+          "oklch(83.57% 0.05596 270.12)",
+          "oklch(95.00% 0.05596 270.12)"
+        ]
+      },
+      "ink-on-surface-variant": {
+        "role": "neutral",
+        "displayName": "Ink On Surface Variant",
+        "tonalRamp": [
+          "oklch(15.00% 0.03069 269.07)",
+          "oklch(26.43% 0.03069 269.07)",
+          "oklch(37.86% 0.03069 269.07)",
+          "oklch(49.29% 0.03069 269.07)",
+          "oklch(60.71% 0.03069 269.07)",
+          "oklch(72.14% 0.03069 269.07)",
+          "oklch(83.57% 0.03069 269.07)",
+          "oklch(95.00% 0.03069 269.07)"
+        ]
+      },
+      "ink-outline": {
+        "role": "neutral",
+        "displayName": "Ink Outline",
+        "tonalRamp": [
+          "oklch(15.00% 0.03553 268.50)",
+          "oklch(26.43% 0.03553 268.50)",
+          "oklch(37.86% 0.03553 268.50)",
+          "oklch(49.29% 0.03553 268.50)",
+          "oklch(60.71% 0.03553 268.50)",
+          "oklch(72.14% 0.03553 268.50)",
+          "oklch(83.57% 0.03553 268.50)",
+          "oklch(95.00% 0.03553 268.50)"
+        ]
+      },
+      "ink-outline-variant": {
+        "role": "neutral",
+        "displayName": "Ink Outline Variant",
+        "tonalRamp": [
+          "oklch(15.00% 0.05596 270.12)",
+          "oklch(26.43% 0.05596 270.12)",
+          "oklch(37.86% 0.05596 270.12)",
+          "oklch(49.29% 0.05596 270.12)",
+          "oklch(60.71% 0.05596 270.12)",
+          "oklch(72.14% 0.05596 270.12)",
+          "oklch(83.57% 0.05596 270.12)",
+          "oklch(95.00% 0.05596 270.12)"
+        ]
+      },
+      "ink-surface-container-lowest": {
+        "role": "neutral",
+        "displayName": "Ink Surface Container Lowest",
+        "tonalRamp": [
+          "oklch(15.00% 0.03086 267.65)",
+          "oklch(26.43% 0.03086 267.65)",
+          "oklch(37.86% 0.03086 267.65)",
+          "oklch(49.29% 0.03086 267.65)",
+          "oklch(60.71% 0.03086 267.65)",
+          "oklch(72.14% 0.03086 267.65)",
+          "oklch(83.57% 0.03086 267.65)",
+          "oklch(95.00% 0.03086 267.65)"
+        ]
+      },
+      "ink-surface-container-low": {
+        "role": "neutral",
+        "displayName": "Ink Surface Container Low",
+        "tonalRamp": [
+          "oklch(15.00% 0.03935 267.61)",
+          "oklch(26.43% 0.03935 267.61)",
+          "oklch(37.86% 0.03935 267.61)",
+          "oklch(49.29% 0.03935 267.61)",
+          "oklch(60.71% 0.03935 267.61)",
+          "oklch(72.14% 0.03935 267.61)",
+          "oklch(83.57% 0.03935 267.61)",
+          "oklch(95.00% 0.03935 267.61)"
+        ]
+      },
+      "ink-surface-container": {
+        "role": "neutral",
+        "displayName": "Ink Surface Container",
+        "tonalRamp": [
+          "oklch(15.00% 0.04574 269.78)",
+          "oklch(26.43% 0.04574 269.78)",
+          "oklch(37.86% 0.04574 269.78)",
+          "oklch(49.29% 0.04574 269.78)",
+          "oklch(60.71% 0.04574 269.78)",
+          "oklch(72.14% 0.04574 269.78)",
+          "oklch(83.57% 0.04574 269.78)",
+          "oklch(95.00% 0.04574 269.78)"
+        ]
+      },
+      "ink-surface-container-high": {
+        "role": "neutral",
+        "displayName": "Ink Surface Container High",
+        "tonalRamp": [
+          "oklch(15.00% 0.05354 270.41)",
+          "oklch(26.43% 0.05354 270.41)",
+          "oklch(37.86% 0.05354 270.41)",
+          "oklch(49.29% 0.05354 270.41)",
+          "oklch(60.71% 0.05354 270.41)",
+          "oklch(72.14% 0.05354 270.41)",
+          "oklch(83.57% 0.05354 270.41)",
+          "oklch(95.00% 0.05354 270.41)"
+        ]
+      },
+      "ink-surface-container-highest": {
+        "role": "neutral",
+        "displayName": "Ink Surface Container Highest",
+        "tonalRamp": [
+          "oklch(15.00% 0.05596 270.12)",
+          "oklch(26.43% 0.05596 270.12)",
+          "oklch(37.86% 0.05596 270.12)",
+          "oklch(49.29% 0.05596 270.12)",
+          "oklch(60.71% 0.05596 270.12)",
+          "oklch(72.14% 0.05596 270.12)",
+          "oklch(83.57% 0.05596 270.12)",
+          "oklch(95.00% 0.05596 270.12)"
+        ]
+      },
+      "ink-error": {
+        "role": "neutral",
+        "displayName": "Ink Error",
+        "tonalRamp": [
+          "oklch(15.00% 0.18122 22.84)",
+          "oklch(26.43% 0.18122 22.84)",
+          "oklch(37.86% 0.18122 22.84)",
+          "oklch(49.29% 0.18122 22.84)",
+          "oklch(60.71% 0.18122 22.84)",
+          "oklch(72.14% 0.18122 22.84)",
+          "oklch(83.57% 0.18122 22.84)",
+          "oklch(95.00% 0.18122 22.84)"
+        ]
+      },
+      "ink-on-error": {
+        "role": "neutral",
+        "displayName": "Ink On Error",
+        "tonalRamp": [
+          "oklch(15.00% 0.08649 27.81)",
+          "oklch(26.43% 0.08649 27.81)",
+          "oklch(37.86% 0.08649 27.81)",
+          "oklch(49.29% 0.08649 27.81)",
+          "oklch(60.71% 0.08649 27.81)",
+          "oklch(72.14% 0.08649 27.81)",
+          "oklch(83.57% 0.08649 27.81)",
+          "oklch(95.00% 0.08649 27.81)"
+        ]
+      }
+    },
+    "typographyMeta": {
+      "headline-medium": {
+        "displayName": "Headline Medium",
+        "purpose": "Inherited Material 3 native typography; dp/sp are normative Android units."
+      },
+      "title-medium": {
+        "displayName": "Title Medium",
+        "purpose": "Inherited Material 3 native typography; dp/sp are normative Android units."
+      },
+      "body-large": {
+        "displayName": "Body Large",
+        "purpose": "Inherited Material 3 native typography; dp/sp are normative Android units."
+      },
+      "body-medium": {
+        "displayName": "Body Medium",
+        "purpose": "Inherited Material 3 native typography; dp/sp are normative Android units."
+      },
+      "body-small": {
+        "displayName": "Body Small",
+        "purpose": "Inherited Material 3 native typography; dp/sp are normative Android units."
+      },
+      "label-large": {
+        "displayName": "Label Large",
+        "purpose": "Inherited Material 3 native typography; dp/sp are normative Android units."
+      }
+    },
+    "shadows": [],
+    "motion": [],
+    "breakpoints": [
+      {
+        "name": "navigation-rail",
+        "value": "600dp"
+      }
+    ],
+    "nativePlatform": {
+      "platform": "Android / Jetpack Compose Material 3",
+      "sources": [
+        "Theme.kt",
+        "BomberHome.kt",
+        "MainScreen.kt",
+        "MainTopBar.kt",
+        "MainSubscriptionInfo.kt",
+        "Components.kt"
+      ],
+      "contentMaxWidth": "560dp",
+      "railContentStart": "88dp",
+      "minimumActionHeights": {
+        "connection": "56dp",
+        "homeHelpSecondary": "48dp"
+      },
+      "dynamicColor": "Optional, off by default; Android 12+",
+      "motion": "Material defaults; top-bar progress expands/shrinks with AnimatedVisibility. No custom duration/easing token.",
+      "previewPolicy": "HTML/CSS is an illustrative dark-theme rendering only. CSS focus/hover is a preview affordance, not a shipped native token. No browser detector applies to this Android artifact.",
+      "tonalRampPolicy": "Synthesized OKLCH ramps in colorMeta are panel-only visual aids, not shipped Android values. Runtime uses the explicit role pairs in DESIGN.md."
+    }
+  },
+  "components": [
+    {
+      "name": "Primary connection",
+      "kind": "button",
+      "description": "Illustrative dark-theme HTML translation. Native Compose owns exact ripple, focus, padding, and disabled states; CSS is preview-only.",
+      "html": "<button class=\"ds-0\">Подключиться</button>",
+      "css": ".ds-0 {background:#FFB02E;color:#1A1204;border:none;border-radius:999px;min-height:56px;width:100%;padding:10px 24px;font:500 14px/20px sans-serif;cursor:pointer} .ds-0:hover {filter:brightness(1.08)} .ds-0:focus-visible {outline:2px solid #BEC6DB;outline-offset:3px} .ds-0:active {filter:brightness(.95)} .ds-0:disabled {opacity:.38;cursor:default}"
+    },
+    {
+      "name": "Tonal import",
+      "kind": "button",
+      "description": "Illustrative dark-theme HTML translation. Native Compose owns exact ripple, focus, padding, and disabled states; CSS is preview-only.",
+      "html": "<button class=\"ds-1\">Импортировать подписку</button>",
+      "css": ".ds-1 {background:#232C4A;color:#EEF1F7;border:none;border-radius:999px;min-height:48px;width:100%;padding:10px 24px;font:500 14px/20px sans-serif;cursor:pointer} .ds-1:hover {filter:brightness(1.08)} .ds-1:focus-visible {outline:2px solid #BEC6DB;outline-offset:3px} .ds-1:active {filter:brightness(.95)} .ds-1:disabled {opacity:.38;cursor:default}"
+    },
+    {
+      "name": "Outlined server",
+      "kind": "button",
+      "description": "Illustrative dark-theme HTML translation. Native Compose owns exact ripple, focus, padding, and disabled states; CSS is preview-only.",
+      "html": "<button class=\"ds-2\">Выбрать сервер</button>",
+      "css": ".ds-2 {background:transparent;color:#FFB02E;border:1px solid #8E97AE;border-radius:999px;min-height:48px;width:100%;padding:10px 24px;font:500 14px/20px sans-serif;cursor:pointer} .ds-2:hover {filter:brightness(1.08)} .ds-2:focus-visible {outline:2px solid #BEC6DB;outline-offset:3px} .ds-2:active {filter:brightness(.95)} .ds-2:disabled {opacity:.38;cursor:default}"
+    },
+    {
+      "name": "Text account",
+      "kind": "button",
+      "description": "Illustrative dark-theme HTML translation. Native Compose owns exact ripple, focus, padding, and disabled states; CSS is preview-only.",
+      "html": "<button class=\"ds-3\">Открыть аккаунт</button>",
+      "css": ".ds-3 {background:transparent;color:#FFB02E;border:none;border-radius:999px;min-height:48px;width:100%;padding:10px 24px;font:500 14px/20px sans-serif;cursor:pointer} .ds-3:hover {filter:brightness(1.08)} .ds-3:focus-visible {outline:2px solid #BEC6DB;outline-offset:3px} .ds-3:active {filter:brightness(.95)} .ds-3:disabled {opacity:.38;cursor:default}"
+    },
+    {
+      "name": "Search field",
+      "kind": "input",
+      "description": "Borderless top-bar search; illustrative HTML translation, not Android input behavior.",
+      "html": "<input class=\"ds-search\" aria-label=\"Поиск\" placeholder=\"Поиск\">",
+      "css": ".ds-search {background:transparent;border:0;color:#EEF1F7;font:16px sans-serif;padding:16px;caret-color:#BEC6DB} .ds-search::placeholder {color:#BEC6DB} .ds-search::selection {background:rgba(190,198,219,.4)} .ds-search:hover {background:#151C33} .ds-search:focus-visible {outline:2px solid #BEC6DB;outline-offset:2px}"
+    },
+    {
+      "name": "Subscription surface",
+      "kind": "card",
+      "refersTo": "subscription-card",
+      "description": "Illustrative data surface; example labels carry no live account values.",
+      "html": "<section class=\"ds-card\"><strong>Подписка</strong><p>Данные подписки</p></section>",
+      "css": ".ds-card {background:rgba(28,36,64,.97);color:#EEF1F7;border:.5px solid rgba(35,44,74,.5);border-radius:12px;padding:2px 8px 10px 16px;font:14px/20px sans-serif} .ds-card strong {font-weight:600} .ds-card p {font:12px/16px sans-serif}"
+    },
+    {
+      "name": "Navigation destinations",
+      "kind": "nav",
+      "description": "Text-only illustrative destination preview; the Android implementation includes vector icons and changes to a rail at the documented breakpoint.",
+      "html": "<nav class=\"ds-nav\"><button aria-current=\"page\">Главная</button><button>Серверы</button><button>Помощь</button></nav>",
+      "css": ".ds-nav {display:flex;background:#151C33;padding:12px;gap:8px} .ds-nav button {flex:1;color:#BEC6DB;background:transparent;border:0;border-radius:16px;min-height:48px;font:500 12px sans-serif} .ds-nav [aria-current] {background:#232C4A;color:#EEF1F7} .ds-nav button:hover {background:#232C4A} .ds-nav button:focus-visible {outline:2px solid #FFB02E} .ds-nav button:active {opacity:.8}"
+    }
+  ],
+  "narrative": {
+    "northStar": "Dependable connection control",
+    "overview": "A dependable connection control built from the established Ink/Mist identity and native Material 3. Quiet surfaces, amber actions, and the owned signal-bomb mark give the Android client its character; connection state and the next action carry the hierarchy.\n\nThis is an extension of the existing v2rayNG surface, with the service engine retaining ownership of connection truth. It uses platform typography, interaction states, and navigation. The pinned brand and native platform were treated as an extension workflow; no replacement-world concept tournament, seed roll, or retrospective comp approval is claimed.",
+    "keyCharacteristics": [
+      "Native Material 3 components and scalable Android typography.",
+      "Ink/Mist by default; wallpaper-derived colors are optional.",
+      "Service state in words and icon treatment; test results remain separate.",
+      "Owned vector identity, with no new shipping raster artwork."
+    ],
+    "rules": [
+      {
+        "name": "The Service Truth Rule",
+        "body": "The signal mark and status follow the service state; connection testing reports its own result.",
+        "section": "colors"
+      },
+      {
+        "name": "The Native Roles Rule",
+        "body": "Use Material typography roles and Android font scaling instead of adding a separate display type system.",
+        "section": "typography"
+      }
+    ],
+    "dos": [
+      "Do use MaterialTheme color roles so light, dark, and optional dynamic themes remain coherent.",
+      "Do retain native font scaling, scrollable content, safe insets, and the home/help width cap.",
+      "Do keep status text and the signal tint tied to service state.",
+      "Do retain explicit minimum action heights and allow longer translated labels to wrap."
+    ],
+    "donts": [
+      "Don't claim protection or successful internet access merely because a connection was requested.",
+      "Don't introduce gradients, glow, shield art, or invented connection metrics.",
+      "Don't replace the owned vector mark with stock VPN imagery.",
+      "Don't promote inherited diagnostic colors or compact utility controls into new brand primitives."
+    ]
+  }
+}

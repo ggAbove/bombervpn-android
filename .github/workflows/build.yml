@@ -1,4 +1,4 @@
-name: Build APK
+name: Signed release (requires signing secrets)
 
 on:
   workflow_dispatch:
@@ -6,9 +6,6 @@ on:
       release_tag:
         required: false
         type: string
-  push:
-    branches:
-      - master
 
 permissions:
   contents: write
@@ -93,7 +90,7 @@ jobs:
         fileName: "android_keystore.jks"
         encodedString: ${{ secrets.APP_KEYSTORE_BASE64 }}
 
-    - name: Build APK
+    - name: Signed release (requires signing secrets)
       run: |
         cd ${{ github.workspace }}/V2rayNG
         echo "sdk.dir=${ANDROID_HOME}" > local.properties

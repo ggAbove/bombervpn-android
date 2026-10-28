@@ -1,90 +1,54 @@
 package com.v2ray.ang.ui
 
 import android.content.Intent
-import android.net.Uri
 import android.os.Bundle
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.activity.viewModels
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.repeatOnLifecycle
 import androidx.lifecycle.lifecycleScope
-import com.v2ray.ang.AppConfig
 import com.v2ray.ang.R
 import com.v2ray.ang.extension.toast
-import com.v2ray.ang.extension.toastError
-import com.v2ray.ang.handler.AngConfigManager
+import com.v2ray.ang.handler.BomberImportLinkParser
 import com.v2ray.ang.ui.base.BaseComponentActivity
 import com.v2ray.ang.ui.main.MainActivity
-import com.v2ray.ang.util.LogUtil
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
-import java.net.URLDecoder
 
 class UrlSchemeActivity : BaseComponentActivity() {
-
+    private val model: UrlImportViewModel by viewModels()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        try {
-            intent.apply {
-                if (action == Intent.ACTION_SEND) {
-                    if ("text/plain" == type) {
-                        intent.getStringExtra(Intent.EXTRA_TEXT)?.let {
-                            parseUri(it, null)
-                        }
-                    }
-                } else if (action == Intent.ACTION_VIEW) {
-                    when (data?.host) {
-                        "install-config" -> {
-                            val uri: Uri? = intent.data
-                            val shareUrl = uri?.getQueryParameter("url").orEmpty()
-                            parseUri(shareUrl, uri?.fragment)
-                        }
-
-                        "install-sub" -> {
-                            val uri: Uri? = intent.data
-                            val shareUrl = uri?.getQueryParameter("url").orEmpty()
-                            parseUri(shareUrl, uri?.fragment)
-                        }
-
-                        else -> {
-                            toastError(R.string.toast_failure)
-                        }
+        val input = when {
+            intent.action == Intent.ACTION_SEND && intent.type == "text/plain" ->
+                intent.getStringExtra(Intent.EXTRA_TEXT)?.takeIf { it.isNotBlank() }
+            intent.action == Intent.ACTION_VIEW ->
+                intent.dataString?.let(BomberImportLinkParser::parse)
+            else -> null
+        }
+        model.import(input)
+        lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
+                model.state.collect { state ->
+                    if (state == UrlImportState.Success || state == UrlImportState.Failure) {
+                        toast(if (state == UrlImportState.Success) R.string.import_subscription_success
+                            else R.string.import_subscription_failure)
+                        startActivity(Intent(this@UrlSchemeActivity, MainActivity::class.java))
+                        finish()
                     }
                 }
             }
-
-            startActivity(Intent(this, MainActivity::class.java))
-            finish()
-        } catch (e: Exception) {
-            LogUtil.e(AppConfig.TAG, "Error processing URL scheme", e)
         }
     }
 
     @Composable
     override fun ScreenContent() {
-    }
-
-    private fun parseUri(uriString: String?, fragment: String?) {
-        if (uriString.isNullOrEmpty()) {
-            return
-        }
-        LogUtil.i(AppConfig.TAG, uriString)
-
-        var decodedUrl = URLDecoder.decode(uriString, "UTF-8")
-        val uri = Uri.parse(decodedUrl)
-        if (uri != null) {
-            if (uri.fragment.isNullOrEmpty() && !fragment.isNullOrEmpty()) {
-                decodedUrl += "#${fragment}"
-            }
-            LogUtil.i(AppConfig.TAG, decodedUrl)
-            lifecycleScope.launch(Dispatchers.IO) {
-                val (count, countSub) = AngConfigManager.importBatchConfig(decodedUrl, "", false)
-                withContext(Dispatchers.Main) {
-                    if (count + countSub > 0) {
-                        toast(R.string.import_subscription_success)
-                    } else {
-                        toast(R.string.import_subscription_failure)
-                    }
-                }
-            }
+        Box(Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
+            CircularProgressIndicator()
         }
     }
 }
