@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name" translatable="false">v2rayNG</string>
+    <string name="app_name" translatable="false">Bomber VPN</string>
     <string name="app_widget_name">Keçid</string>
-    <string name="app_tile_name">Keçid</string>
+    <string name="app_tile_name">Bomber VPN</string>
     <string name="app_tile_first_use">Bu funksiyanı istifadə etməzdən əvvəl tətbiqə profil əlavə edin.</string>
     <string name="navigation_drawer_open">Naviqasiya menyusunu açın</string>
     <string name="navigation_drawer_close">Naviqasiya menyusunu bağlayın</string>
@@ -405,7 +405,7 @@
     <string name="connection_test_error">Bağlantı sınağı uğursuz oldu: %s</string>
     <string name="connection_test_fail">İnternet əlçatmazdır</string>
     <string name="connection_test_error_status_code">Xəta kodu: #%d</string>
-    <string name="connection_connected">Qoşuldu. Bağlantını yoxlamaq üçün toxunun.</string>
+    <string name="connection_connected">Check internet access in Help.</string>
     <string name="connection_not_connected">Qoşulmayıb</string>
     <string name="connection_running_task_left">İcra olunan sınaqlar: %s</string>
 

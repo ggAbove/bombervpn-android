@@ -1,5 +1,18 @@
 package com.v2ray.ang.ui.main
 
+import androidx.activity.compose.BackHandler
+import androidx.compose.foundation.layout.consumeWindowInsets
+import androidx.compose.material3.NavigationRail
+import androidx.compose.material3.NavigationRailItem
+import androidx.compose.ui.platform.LocalWindowInfo
+import androidx.compose.ui.platform.LocalDensity
+import androidx.compose.material3.NavigationBar
+import androidx.compose.material3.NavigationBarItem
+import androidx.compose.material3.Icon
+import androidx.compose.material3.Text
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
+import com.v2ray.ang.R
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
@@ -15,6 +28,7 @@ import androidx.compose.material3.ScaffoldDefaults
 import androidx.compose.material3.rememberDrawerState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.key
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateMapOf
 import androidx.compose.runtime.mutableStateOf
@@ -29,7 +43,6 @@ import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.v2ray.ang.dto.entities.ProfileItem
-import com.v2ray.ang.ui.compose.LocalDarkTheme
 import com.v2ray.ang.ui.compose.QRCodeDialog
 import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.launch
@@ -41,6 +54,23 @@ fun MainScreen(
     onNavigate: (MainDestination) -> Unit,
 ) {
     val uiState by mainViewModel.uiState.collectAsStateWithLifecycle()
+    var destination by rememberSaveable { mutableStateOf("home") }
+    BackHandler(enabled = destination != "home") { destination = "home" }
+    // Selection is global: browsing another subscription must not hide the active server name.
+    val selectedName = uiState.groups.firstNotNullOfOrNull { group ->
+        key(group.id) {
+            val groupState by remember(group.id) {
+                mainViewModel.serverGroupState(group.id)
+            }.collectAsStateWithLifecycle()
+            groupState.rows.firstOrNull { it.guid == uiState.selectedGuid }?.remarks
+        }
+    }
+    val wideLayout = with(LocalDensity.current) { LocalWindowInfo.current.containerSize.width.toDp() } >= 600.dp
+    val destinations = listOf(
+        Triple("home", R.string.bomber_home, R.drawable.ic_play_24dp),
+        Triple("servers", R.string.bomber_servers, R.drawable.ic_subscriptions_24dp),
+        Triple("help", R.string.bomber_help, R.drawable.ic_about_24dp),
+    )
     val groups = uiState.groups
     val isLoading by mainViewModel.isLoading.collectAsStateWithLifecycle()
     val isRunning = uiState.isRunning
@@ -50,7 +80,6 @@ fun MainScreen(
     val confirmRemove = uiState.confirmRemove
     val shareQRCodeBitmap = uiState.shareQRCodeBitmap
 
-    val isDarkTheme = LocalDarkTheme.current
     val drawerState = rememberDrawerState(DrawerValue.Closed)
     val scope = rememberCoroutineScope()
     var showSearch by remember { mutableStateOf(false) }
@@ -165,7 +194,10 @@ fun MainScreen(
                         onAction(MainAction.Search(""))
                         showSearch = false
                     },
-                    onSearchToggle = { show: Boolean -> showSearch = show },
+                    onSearchToggle = { show: Boolean ->
+                        showSearch = show
+                        if (show) destination = "servers"
+                    },
                     onMenuClick = { scope.launch { drawerState.open() } },
                     onAction = onAction,
                     onMoreMenuAction = { action ->
@@ -185,22 +217,45 @@ fun MainScreen(
                 )
             },
             bottomBar = {
-                MainBottomBar(
+                Column {
+                if (destination == "servers") MainBottomBar(
                     displayText = displayText,
                     isRunning = isRunning,
-                    isDarkTheme = isDarkTheme,
                     onAction = onAction
                 )
+                if (!wideLayout) NavigationBar {
+                    destinations.forEach { (id, label, icon) ->
+                        NavigationBarItem(selected = destination == id, onClick = { destination = id },
+                            icon = { Icon(painterResource(icon), null) }, label = { Text(stringResource(label)) })
+                    }
+                }
+                }
             },
             floatingActionButton = {},
         ) { innerPadding ->
             val layoutDirection = LocalLayoutDirection.current
 
-            if (groups.isNotEmpty()) {
+            if (wideLayout) {
+                NavigationRail(Modifier.padding(innerPadding)) {
+                    destinations.forEach { (id, label, icon) ->
+                        NavigationRailItem(selected = destination == id, onClick = { destination = id },
+                            icon = { Icon(painterResource(icon), null) }, label = { Text(stringResource(label)) })
+                    }
+                }
+            }
+            val contentModifier = Modifier.fillMaxSize().padding(innerPadding).consumeWindowInsets(innerPadding)
+                .padding(start = if (wideLayout) 88.dp else 0.dp)
+            if (destination == "home") {
+                BomberHome(uiState, displayText, isLoading, selectedName, onAction,
+                    onServers = {
+                        destination = "servers"
+                        onAction(MainAction.LocateSelectedServer)
+                    }, modifier = contentModifier)
+            } else if (destination == "help") {
+                BomberHelp(uiState, displayText, isLoading, onAction, onNavigate, contentModifier)
+            } else if (groups.isNotEmpty()) {
                 Column(
-                    modifier = Modifier
-                        .fillMaxSize()
-                        .padding(innerPadding)
+                    modifier = contentModifier
                 ) {
                     if (groups.size > 1) {
                         GroupTabBar(

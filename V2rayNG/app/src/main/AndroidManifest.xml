@@ -45,7 +45,7 @@
         android:name=".AngApplication"
         android:allowBackup="true"
         android:banner="@mipmap/ic_banner"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@drawable/bomber_launcher"
         android:label="@string/app_name"
         android:networkSecurityConfig="@xml/network_security_config"
         android:supportsRtl="true"
@@ -196,6 +196,7 @@
                 <category android:name="android.intent.category.BROWSABLE" />
                 <category android:name="android.intent.category.DEFAULT" />
 
+                <data android:scheme="bombervpn" />
                 <data android:scheme="v2rayng" />
                 <data android:host="install-config" />
                 <data android:host="install-sub" />
@@ -319,7 +320,7 @@
         <activity
             android:name=".ui.shortcut.TaskerActivity"
             android:exported="true"
-            android:icon="@mipmap/ic_launcher">
+            android:icon="@drawable/bomber_launcher">
             <intent-filter>
                 <action android:name="com.twofortyfouram.locale.intent.action.EDIT_SETTING" />
             </intent-filter>

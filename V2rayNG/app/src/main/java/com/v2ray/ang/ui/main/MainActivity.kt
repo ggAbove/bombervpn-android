@@ -98,6 +98,12 @@ class MainActivity : HelperBaseComponentActivity() {
         checkAndRequestPermission(PermissionType.POST_NOTIFICATIONS) {}
     }
 
+    override fun onNewIntent(intent: Intent) {
+        super.onNewIntent(intent)
+        // External imports return to this singleTask activity after updating persisted profiles.
+        mainViewModel.onAction(MainAction.RefreshGroups)
+    }
+
     @Composable
     override fun ScreenContent() {
         BackHandler { moveTaskToBack(false) }
@@ -158,7 +164,7 @@ class MainActivity : HelperBaseComponentActivity() {
             MainDestination.Promotion -> {
                 Utils.openUri(
                     this,
-                    "${Utils.decode(AppConfig.APP_PROMOTION_URL)}?t=${System.currentTimeMillis()}"
+                    "https://t.me/openbomber_vpn_bot"
                 )
                 return
             }

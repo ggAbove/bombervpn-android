@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="bomber_home">Home</string>
+    <string name="bomber_help">Help</string>
+    <string name="bomber_connected">Connected</string>
+    <string name="bomber_disconnected">Ready when you are</string>
+    <string name="bomber_disconnect">Disconnect</string>
+    <string name="bomber_connect">Connect</string>
+    <string name="bomber_choose_server">Choose server</string>
+    <string name="bomber_first_connection">Copy your subscription link from BomberVPN, then import it below and select a server.</string>
+    <string name="bomber_subscription">Your subscription</string>
+    <string name="bomber_import">Import from clipboard</string>
+    <string name="bomber_scan">Scan QR code</string>
+    <string name="bomber_account">Open my BomberVPN account</string>
+    <string name="bomber_help_title">Get connected again</string>
+    <string name="bomber_help_intro">Follow these steps. Your connection test result appears here.</string>
+    <string name="bomber_refresh_hint">Refresh your subscription to get the current servers and settings.</string>
+    <string name="bomber_refresh">Refresh subscription</string>
+    <string name="bomber_test_hint">Connect to a server, then check whether traffic can reach the internet.</string>
+    <string name="bomber_test">Test connection</string>
+    <string name="bomber_network_hint">If the test fails, try another server or switch between Wi-Fi and mobile data. Check which apps use the VPN.</string>
+    <string name="bomber_apps">Apps using VPN</string>
+    <string name="bomber_logs">Open diagnostic log</string>
+    <string name="bomber_support">Contact support</string>
+    <string name="bomber_privacy_hint">Never send your subscription link or configuration to a public chat.</string>
+    <string name="bomber_servers">Servers</string>
+    <string name="bomber_selected_server">Selected server</string>
+    <string name="bomber_setup">Add your subscription</string>
+</resources>
