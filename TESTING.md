@@ -38,4 +38,31 @@ The script adds one synthetic local VLESS profile and checks that it appears whi
 - Root-mode and proxy-only end-to-end traffic: core implementations unchanged; VPN mode exercised.
 - TalkBack spoken-label/audio audit: emulator launched without audio; focus/activation and semantics checked separately.
 - Camera decoding from a physical QR image: existing scanner retained; unit/runtime import paths tested.
-- Production-signed release and store upload: no owner signing key supplied. Delivered binaries are debug builds; signing workflow remains manual.
+- Store upload: not attempted.
+
+## Simplified home and server list (2026-10-29)
+
+API35 emulator, Play Store debug build at branch HEAD.
+
+- Unit: `BomberGroupPolicyTest` (empty-group hiding, imported subscription id, selection fallback); full suites 143/143 per flavor; `lintPlaystoreDebug`, `lintFdroidDebug`.
+- Import: subscription from a local HTTP fixture via file picker and via `bombervpn://install-sub`; empty built-in "Default" group hidden, a server of the imported group selected; selection still shown after force-stop and relaunch.
+- States: setup (no subscription), ready, running (real connect, `tun0` up), zero servers on the Servers tab with disabled connect button.
+- Themes: light, dark, font scale 1.3, dynamic color on and off; server list single and double column.
+- Semantics tree (uiautomator): connect control is one clickable node whose child carries the action label; server row is one clickable node containing caption and name; chevron has no label.
+- D-pad: one DOWN focuses the connect control, CENTER opens the system VPN consent; CENTER on the server row opens Servers; BACK returns to Home.
+- Row ⋮ menu: QR, copy link, copy full config, edit, delete.
+
+Found, not changed (outside scope): keyboard TAB past the bottom navigation moves focus into the closed navigation drawer; ENTER then opens a drawer destination.
+
+Not run:
+- TalkBack spoken output: emulator has no audio; semantics checked through the accessibility tree only.
+- Tablet / navigation-rail width: no tablet AVD.
+- Physical device.
+
+## Release signing (2026-10-29)
+
+- `scripts/build-release.sh`: 10 release APKs (Play Store and F-Droid, 4 ABIs + universal) signed by the release certificate; each verified with apksigner, v2 scheme, one signer.
+- Workflow verify step run locally: release APKs pass and get SHA256SUMS; a planted debug APK fails the step.
+- API35 emulator, signed Play Store arm64 release: clean install, import via `bombervpn://install-sub` deeplink, server auto-selected, system VPN permission, `tun0` up and validated.
+- Upgrade from the published debug-signed preview to the signed release: `INSTALL_FAILED_UPDATE_INCOMPATIBLE` (expected; preview must be uninstalled).
+- Not run: the CI workflow itself on GitHub (needs the branch pushed).

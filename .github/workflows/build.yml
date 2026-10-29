@@ -1,159 +1,138 @@
-name: Signed release (requires signing secrets)
+name: Bomber VPN signed release
 
 on:
   workflow_dispatch:
     inputs:
       release_tag:
+        description: 'Tag for a draft release, e.g. v1.0.1. Leave empty to build artifacts only.'
         required: false
         type: string
+      prerelease:
+        description: 'Mark the draft as a prerelease'
+        required: false
+        type: boolean
+        default: false
 
 permissions:
   contents: write
 
+env:
+  # SHA-256 of the Bomber VPN release signing certificate (public value).
+  # Any APK signed by something else fails the run instead of being published.
+  EXPECTED_CERT_SHA256: b15d324a8399110b4e8d6805e515360aad88edb21846c078ff1df4d91c2f0c9b
+
 jobs:
-  build:
+  release:
     runs-on: ubuntu-latest
-
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v7
-      with:
-        submodules: 'recursive'
-        fetch-depth: '0'
-
-    - name: Setup Android SDK
-      uses: android-actions/setup-android@v4
-      with:
-        log-accepted-android-sdk-licenses: false
-        cmdline-tools-version: '14742923'
-        packages: 'platforms;android-37.0 build-tools;37.0.0 platform-tools'
-
-    - name: Install NDK
-      run: |
-        echo "y" | $ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager \
-          --channel=0 \
-          --install "ndk;30.0.16248370"
-        echo "NDK_HOME=$ANDROID_HOME/ndk/30.0.16248370" >> $GITHUB_ENV
-        sed -i '10i\
-        \
-            ndkVersion = "30.0.16248370"' ${{ github.workspace }}/V2rayNG/app/build.gradle.kts
-
-    - name: Restore cached libhevtun
-      id: cache-libhevtun-restore
-      uses: actions/cache/restore@v6
-      with:
-        path: ${{ github.workspace }}/libs
-        key: libhevtun-${{ runner.os }}-${{ env.NDK_HOME }}-${{ hashFiles('.git/modules/hev-socks5-tunnel/HEAD') }}-${{ hashFiles('compile-hevtun.sh') }}
-
-    - name: Build libhevtun
-      if: steps.cache-libhevtun-restore.outputs.cache-hit != 'true'
-      run: |
-        bash compile-hevtun.sh
-    
-    - name: Save libhevtun
-      if: steps.cache-libhevtun-restore.outputs.cache-hit != 'true'
-      uses: actions/cache/save@v6
-      with:
-        path: ${{ github.workspace }}/libs
-        key: libhevtun-${{ runner.os }}-${{ env.NDK_HOME }}-${{ hashFiles('.git/modules/hev-socks5-tunnel/HEAD') }}-${{ hashFiles('compile-hevtun.sh') }}
-
-    - name: Copy libhevtun
-      run: |
-        cp -r ${{ github.workspace }}/libs ${{ github.workspace }}/V2rayNG/app
-
-    - name: Fetch AndroidLibXrayLite tag
-      run: |
-        pushd AndroidLibXrayLite
-        CURRENT_TAG=$(git describe --tags --abbrev=0)
-        echo "Current tag in this repo: $CURRENT_TAG"
-        echo "CURRENT_TAG=$CURRENT_TAG" >> $GITHUB_ENV
-        popd
-
-    - name: Download libv2ray
-      uses: robinraju/release-downloader@v1.13
-      with:
-        repository: '2dust/AndroidLibXrayLite'
-        tag: ${{ env.CURRENT_TAG }}
-        fileName: 'libv2ray.aar'
-        out-file-path: V2rayNG/app/libs/
-
-    - name: Setup Java
-      uses: actions/setup-java@v6.1.0
-      with:
-        distribution: 'temurin'
-        java-version: '21'
-
-    - name: Decode Keystore
-      uses: timheuer/base64-to-file@v2.0.0
-      id: android_keystore
-      with:
-        fileName: "android_keystore.jks"
-        encodedString: ${{ secrets.APP_KEYSTORE_BASE64 }}
-
-    - name: Signed release (requires signing secrets)
-      run: |
-        cd ${{ github.workspace }}/V2rayNG
-        echo "sdk.dir=${ANDROID_HOME}" > local.properties
-        chmod 755 gradlew
-        ./gradlew licenseFdroidReleaseReport
-        ./gradlew assembleRelease -Pandroid.injected.signing.store.file=${{ steps.android_keystore.outputs.filePath }} -Pandroid.injected.signing.store.password=${{ secrets.APP_KEYSTORE_PASSWORD }} -Pandroid.injected.signing.key.alias=${{ secrets.APP_KEYSTORE_ALIAS }} -Pandroid.injected.signing.key.password=${{ secrets.APP_KEY_PASSWORD }}
-    
-    - name: Upload arm64-v8a APK
-      uses: actions/upload-artifact@v7
-      if: ${{  success() }}
-      with:
-        name: arm64-v8a
-        path: ${{ github.workspace }}/V2rayNG/app/build/outputs/apk/*/release/*arm64-v8a*.apk
-
-    - name: Upload armeabi-v7a APK
-      uses: actions/upload-artifact@v7
-      if: ${{  success() }}
-      with:
-        name: armeabi-v7a
-        path: ${{ github.workspace }}/V2rayNG/app/build/outputs/apk/*/release/*armeabi-v7a*.apk
-
-    - name: Upload x86 APK
-      uses: actions/upload-artifact@v7
-      if: ${{  success() }}
-      with:
-        name: x86-apk
-        path: ${{ github.workspace }}/V2rayNG/app/build/outputs/apk/*/release/*x86*.apk
-
-    - name: Upload universal APK
-      uses: actions/upload-artifact@v7
-      if: ${{ success() }}
-      with:
-        name: universal-apk
-        path: ${{ github.workspace }}/V2rayNG/app/build/outputs/apk/*/release/*universal*.apk
-
-  sign-and-release:
-    needs: build
-    runs-on: ubuntu-26.04
-    if: github.event_name == 'workflow_dispatch' && inputs.release_tag != ''
-
-    steps:
-      - name: Download APK artifacts
-        uses: actions/download-artifact@v8
+      - uses: actions/checkout@v7
         with:
-          path: release
+          submodules: recursive
+          fetch-depth: 0
 
-      - name: Sign APK files
+      - uses: actions/setup-java@v6.1.0
+        with:
+          distribution: temurin
+          java-version: '21'
+
+      - uses: android-actions/setup-android@v4
+        with:
+          log-accepted-android-sdk-licenses: false
+          cmdline-tools-version: '14742923'
+          packages: 'platforms;android-37.0 build-tools;37.0.0 platform-tools ndk;30.0.16248370'
+
+      - name: Prepare pinned native libraries
+        env:
+          GH_TOKEN: ${{ github.token }}
         run: |
-          printf '%s' "${{ secrets.GPG_PRIVATE_KEY }}" | gpg --batch --import
-          KEY=$(gpg --list-secret-keys --with-colons | awk -F: '/^fpr:/ {print $10; exit}')
-          mkdir -p release-files
+          export NDK_HOME="$ANDROID_HOME/ndk/30.0.16248370"
+          bash compile-hevtun.sh
+          mkdir -p V2rayNG/app/libs
+          cp -R libs/. V2rayNG/app/libs/
+          core_tag=$(git -C AndroidLibXrayLite describe --tags --exact-match)
+          gh release download "$core_tag" --repo 2dust/AndroidLibXrayLite --pattern libv2ray.aar --dir V2rayNG/app/libs
 
-          find release -type f -name '*.apk' | while read apk; do
-            cp "$apk" release-files/
-            gpg --batch --yes --local-user "$KEY" --detach-sign --output "release-files/$(basename "$apk").sig" "$apk"
+      - name: Decode release keystore
+        env:
+          APP_KEYSTORE_BASE64: ${{ secrets.APP_KEYSTORE_BASE64 }}
+        run: |
+          if [ -z "$APP_KEYSTORE_BASE64" ]; then
+            echo "::error::APP_KEYSTORE_BASE64 secret is missing"
+            exit 1
+          fi
+          printf '%s' "$APP_KEYSTORE_BASE64" | base64 -d > "$RUNNER_TEMP/release.jks"
+
+      - name: Build signed APKs (Play Store and F-Droid, all ABIs)
+        working-directory: V2rayNG
+        env:
+          APP_KEYSTORE_PASSWORD: ${{ secrets.APP_KEYSTORE_PASSWORD }}
+          APP_KEYSTORE_ALIAS: ${{ secrets.APP_KEYSTORE_ALIAS }}
+          APP_KEY_PASSWORD: ${{ secrets.APP_KEY_PASSWORD }}
+        run: |
+          ./gradlew :app:licenseFdroidReleaseReport :app:assemblePlaystoreRelease :app:assembleFdroidRelease \
+            --console=plain \
+            -Pandroid.injected.signing.store.file="$RUNNER_TEMP/release.jks" \
+            -Pandroid.injected.signing.store.password="$APP_KEYSTORE_PASSWORD" \
+            -Pandroid.injected.signing.key.alias="$APP_KEYSTORE_ALIAS" \
+            -Pandroid.injected.signing.key.password="$APP_KEY_PASSWORD"
+
+      - name: Remove keystore from the runner
+        if: always()
+        run: rm -f "$RUNNER_TEMP/release.jks"
+
+      - name: Verify signatures and write checksums
+        run: |
+          apksigner=$(ls "$ANDROID_HOME"/build-tools/*/apksigner | sort -V | tail -1)
+          dist="$RUNNER_TEMP/dist"
+          mkdir -p "$dist"
+          count=0
+          for apk in V2rayNG/app/build/outputs/apk/*/release/*.apk; do
+            out=$("$apksigner" verify -v --print-certs "$apk")
+            digests=$(sed -n 's/.*certificate SHA-256 digest: //p' <<<"$out" | sort -u)
+            if [ "$digests" != "$EXPECTED_CERT_SHA256" ] || ! grep -q '^Number of signers: 1$' <<<"$out"; then
+              echo "::error::$(basename "$apk") is not signed with the Bomber VPN release key"
+              exit 1
+            fi
+            cp "$apk" "$dist/"
+            count=$((count + 1))
           done
+          if [ "$count" -lt 10 ]; then
+            echo "::error::expected 10 APKs (4 ABIs + universal for each of 2 flavors), got $count"
+            exit 1
+          fi
+          # Stable name for download links (sub page, mini app): releases/latest/download/BomberVPN.apk.
+          # It holds no ABI in its name, so the in-app updater never picks it.
+          universal=$(find "$dist" -name 'BomberVPN_*_universal.apk' ! -name '*fdroid*')
+          if [ "$(wc -l <<<"$universal")" -ne 1 ] || [ ! -f "$universal" ]; then
+            echo "::error::expected exactly one Play Store universal APK, got: $universal"
+            exit 1
+          fi
+          cp "$universal" "$dist/BomberVPN.apk"
+          (cd "$dist" && sha256sum *.apk > SHA256SUMS.txt && cat SHA256SUMS.txt)
 
-          gpg --armor --export "$KEY" > release-files/v2rayN-public-key.asc
-
-      - name: Upload APKs, signatures and public key to release
-        uses: svenstaro/upload-release-action@v2
+      - uses: actions/upload-artifact@v7
         with:
-          file: release-files/*
-          tag: ${{ inputs.release_tag }}
-          file_glob: true
-          prerelease: true
+          name: BomberVPN-release-apks
+          path: ${{ runner.temp }}/dist/*
+
+      - name: Attach to draft release
+        if: inputs.release_tag != ''
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+          TAG: ${{ inputs.release_tag }}
+          PRERELEASE: ${{ inputs.prerelease }}
+        run: |
+          dist="$RUNNER_TEMP/dist"
+          if gh release view "$TAG" >/dev/null 2>&1; then
+            # Never replace files of a release users may already have downloaded.
+            if [ "$(gh release view "$TAG" --json isDraft --jq .isDraft)" != "true" ]; then
+              echo "::error::release $TAG is already published; use a new tag"
+              exit 1
+            fi
+            gh release upload "$TAG" "$dist"/* --clobber
+          else
+            flags=(--draft --target "$GITHUB_SHA" --title "Bomber VPN ${TAG#v}" --notes "Signed release. Verify files with SHA256SUMS.txt.")
+            if [ "$PRERELEASE" = "true" ]; then flags+=(--prerelease); fi
+            gh release create "$TAG" "${flags[@]}" "$dist"/*
+          fi

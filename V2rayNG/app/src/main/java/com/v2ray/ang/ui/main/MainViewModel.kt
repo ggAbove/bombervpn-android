@@ -433,6 +433,16 @@ class MainViewModel(
         return resolved
     }
 
+    private fun visibleGroups(groups: List<GroupMapItem>): List<GroupMapItem> =
+        visibleGroups(groups) { dataSource.getServerGuidList(it).size }
+
+    /** A customer should land on a chosen server after an import, not on an empty home screen. */
+    private fun ensureSelectedServer() {
+        val groupId = uiState.value.selectedGroupId
+        val resolved = resolveSelectedServer(groupId, dataSource.getServerGuidList(groupId), dataSource.getSelectServer())
+        if (resolved != null && resolved != dataSource.getSelectServer()) updateSelectedGuid(resolved)
+    }
+
     private fun radialPreloadOrder(groups: List<GroupMapItem>, selectedIndex: Int): List<String> {
         if (groups.isEmpty()) return emptyList()
         val result = ArrayList<String>((groups.size - 1).coerceAtLeast(0))
@@ -463,7 +473,7 @@ class MainViewModel(
                             SubscriptionInfoParser.withWebPageFallback(info, it.subscription.url)
                         },
                     )
-                }
+                }.let(::visibleGroups)
                 val selectedGroup = resolveSelectedGroup(groups)
                 val validIds = groups.mapTo(HashSet()) { it.id }
                 groupUiFlows.keys.removeAll { it !in validIds }
@@ -519,16 +529,28 @@ class MainViewModel(
         launchLoading {
             withContext(ioDispatcher) {
                 try {
+                    val subsBefore = dataSource.getSubsList()
                     val (count, countSub) = dataSource.importBatchConfig(
                         configText, uiState.value.selectedGroupId, true
                     )
+                    if (countSub > 0) {
+                        // Open the subscription that was just imported instead of whatever tab was current.
+                        newlyImportedSubscriptionId(subsBefore, dataSource.getSubsList())?.let { newId ->
+                            dataSource.setSelectedSubscriptionId(newId)
+                            _uiState.update { it.copy(selectedGroupId = newId) }
+                        }
+                    }
                     when {
                         count > 0 -> {
                             toast(dataSource.getString(R.string.title_import_config_count, count))
-                            setupGroupTab(forceRefresh = true)
+                            setupGroupTab(forceRefresh = true).join()
+                            ensureSelectedServer()
                         }
 
-                        countSub > 0 -> setupGroupTab(forceRefresh = true)
+                        countSub > 0 -> {
+                            setupGroupTab(forceRefresh = true).join()
+                            ensureSelectedServer()
+                        }
                         else -> toastError(R.string.toast_failure)
                     }
                 } catch (cancelled: CancellationException) {

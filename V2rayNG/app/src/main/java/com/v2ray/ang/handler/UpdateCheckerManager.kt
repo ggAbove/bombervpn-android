@@ -75,16 +75,33 @@ object UpdateCheckerManager {
         }
     }
 
-    private fun compareVersions(version1: String, version2: String): Int {
-        val v1 = version1.split(".")
-        val v2 = version2.split(".")
-
-        for (i in 0 until maxOf(v1.size, v2.size)) {
-            val num1 = if (i < v1.size) v1[i].toInt() else 0
-            val num2 = if (i < v2.size) v2[i].toInt() else 0
-            if (num1 != num2) return num1 - num2
+    internal fun compareVersions(version1: String, version2: String): Int {
+        // Build metadata has no precedence; a stable version follows its prereleases.
+        val v1 = version1.substringBefore('+').split('-', limit = 2)
+        val v2 = version2.substringBefore('+').split('-', limit = 2)
+        val core1 = v1[0].split(".")
+        val core2 = v2[0].split(".")
+        for (i in 0 until maxOf(core1.size, core2.size)) {
+            val comparison = (core1.getOrNull(i) ?: "0").toBigInteger()
+                .compareTo((core2.getOrNull(i) ?: "0").toBigInteger())
+            if (comparison != 0) return comparison
         }
-        return 0
+        if (v1.size == 1 || v2.size == 1) return v2.size.compareTo(v1.size)
+
+        val pre1 = v1[1].split(".")
+        val pre2 = v2[1].split(".")
+        for (i in 0 until minOf(pre1.size, pre2.size)) {
+            val num1 = pre1[i].toBigIntegerOrNull()
+            val num2 = pre2[i].toBigIntegerOrNull()
+            val comparison = when {
+                num1 != null && num2 != null -> num1.compareTo(num2)
+                num1 != null -> -1
+                num2 != null -> 1
+                else -> pre1[i].compareTo(pre2[i])
+            }
+            if (comparison != 0) return comparison
+        }
+        return pre1.size.compareTo(pre2.size)
     }
 
     private fun getDownloadUrl(release: GitHubRelease, abi: String): String {
