@@ -7,7 +7,7 @@
     <string name="bomber_disconnect">Отключить</string>
     <string name="bomber_connect">Подключить</string>
     <string name="bomber_choose_server">Выбрать сервер</string>
-    <string name="bomber_first_connection">Скопируйте ссылку подписки из BomberVPN, добавьте её ниже и выберите сервер.</string>
+    <string name="bomber_first_connection">Скопируйте ссылку подписки из BomberVPN и добавьте её.</string>
     <string name="bomber_subscription">Ваша подписка</string>
     <string name="bomber_import">Добавить из буфера</string>
     <string name="bomber_scan">Сканировать QR-код</string>
@@ -26,4 +26,8 @@
     <string name="bomber_servers">Серверы</string>
     <string name="bomber_selected_server">Выбранный сервер</string>
     <string name="bomber_setup">Добавьте подписку</string>
+    <string name="bomber_hint_idle">Нажмите на кнопку, чтобы подключиться</string>
+    <string name="bomber_hint_running">Нажмите на кнопку, чтобы отключиться</string>
+    <string name="bomber_server">Сервер</string>
+    <string name="bomber_servers_empty">Серверов пока нет. Добавьте подписку на главном экране.</string>
 </resources>

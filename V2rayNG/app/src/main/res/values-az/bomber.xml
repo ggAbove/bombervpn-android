@@ -7,7 +7,7 @@
     <string name="bomber_disconnect">Disconnect</string>
     <string name="bomber_connect">Connect</string>
     <string name="bomber_choose_server">Choose server</string>
-    <string name="bomber_first_connection">Copy your subscription link from BomberVPN, then import it below and select a server.</string>
+    <string name="bomber_first_connection">Copy your subscription link from BomberVPN and add it.</string>
     <string name="bomber_subscription">Your subscription</string>
     <string name="bomber_import">Import from clipboard</string>
     <string name="bomber_scan">Scan QR code</string>
@@ -26,4 +26,8 @@
     <string name="bomber_servers">Servers</string>
     <string name="bomber_selected_server">Selected server</string>
     <string name="bomber_setup">Add your subscription</string>
+    <string name="bomber_hint_idle">Tap the button to connect</string>
+    <string name="bomber_hint_running">Tap the button to disconnect</string>
+    <string name="bomber_server">Server</string>
+    <string name="bomber_servers_empty">No servers yet. Add your subscription on the home screen.</string>
 </resources>

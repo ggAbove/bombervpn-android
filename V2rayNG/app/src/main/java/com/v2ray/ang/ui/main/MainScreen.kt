@@ -200,6 +200,7 @@ fun MainScreen(
                     },
                     onMenuClick = { scope.launch { drawerState.open() } },
                     onAction = onAction,
+                    showTools = destination == "servers",
                     onMoreMenuAction = { action ->
                         when (action) {
                             MainMoreMenuAction.RestartService -> onAction(MainAction.RestartService)
@@ -221,7 +222,8 @@ fun MainScreen(
                 if (destination == "servers") MainBottomBar(
                     displayText = displayText,
                     isRunning = isRunning,
-                    onAction = onAction
+                    onAction = onAction,
+                    canConnect = !selectedGuid.isNullOrEmpty(),
                 )
                 if (!wideLayout) NavigationBar {
                     destinations.forEach { (id, label, icon) ->

@@ -18,13 +18,15 @@ import com.v2ray.ang.R
 fun MainBottomBar(
     displayText: String,
     isRunning: Boolean,
-    onAction: (MainAction) -> Unit
+    onAction: (MainAction) -> Unit,
+    /** Same rule as the home control: nothing to connect to until a server is selected. */
+    canConnect: Boolean = true,
 ) {
     Column(Modifier.fillMaxWidth().padding(horizontal = 24.dp, vertical = 8.dp),
         verticalArrangement = Arrangement.spacedBy(8.dp)) {
         Text(displayText, style = MaterialTheme.typography.bodyMedium,
             color = MaterialTheme.colorScheme.onSurfaceVariant)
-        Button(onClick = { onAction(MainAction.ToggleService) },
+        Button(onClick = { onAction(MainAction.ToggleService) }, enabled = isRunning || canConnect,
             modifier = Modifier.fillMaxWidth().heightIn(min = 48.dp)) {
             Text(stringResource(if (isRunning) R.string.bomber_disconnect else R.string.bomber_connect))
         }

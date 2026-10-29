@@ -53,6 +53,7 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import androidx.compose.ui.text.style.TextAlign
 import com.v2ray.ang.R
 import com.v2ray.ang.dto.LocateTarget
 import com.v2ray.ang.dto.entities.ProfileItem
@@ -141,6 +142,16 @@ fun GroupPagerPage(
             },
             contentPadding = listPadding
         )
+        if (groupState.rows.isEmpty() && searchQuery.isEmpty()) {
+            // Nothing to pick yet: say so instead of a blank screen (search has its own "no matches" feel).
+            Text(
+                stringResource(R.string.bomber_servers_empty),
+                modifier = Modifier.align(Alignment.Center).padding(horizontal = 32.dp),
+                style = MaterialTheme.typography.bodyLarge,
+                color = MaterialTheme.colorScheme.onSurfaceVariant,
+                textAlign = TextAlign.Center,
+            )
+        }
         if (usageInfo != null) {
             SubscriptionInfoCard(
                 info = usageInfo,
@@ -203,7 +214,6 @@ private fun ServerListPage(
                     ServerItemColumn(
                         row = row,
                         isSelected = row.guid == selectedGuid,
-                        doubleColumnDisplay = true,
                         actions = actions
                     )
                 }
@@ -313,7 +323,6 @@ private fun ServerItemRow(
     ServerListItem(
         row = row,
         isSelected = isSelected,
-        doubleColumnDisplay = false,
         actions = actions
     )
 }
@@ -322,14 +331,12 @@ private fun ServerItemRow(
 private fun ServerItemColumn(
     row: ServerRowUiModel,
     isSelected: Boolean,
-    doubleColumnDisplay: Boolean,
     actions: ServerRowActions
 ) {
     Column {
         ServerListItem(
             row = row,
             isSelected = isSelected,
-            doubleColumnDisplay = doubleColumnDisplay,
             actions = actions
         )
         ItemDivider()
@@ -340,7 +347,6 @@ private fun ServerItemColumn(
 private fun ServerListItem(
     row: ServerRowUiModel,
     isSelected: Boolean,
-    doubleColumnDisplay: Boolean,
     actions: ServerRowActions
 ) {
     val testResult = if (row.testDelayMillis == 0L) {
@@ -390,36 +396,13 @@ private fun ServerListItem(
         ) {
             Row(Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically) {
                 Text(row.remarks, Modifier.weight(1f), style = MaterialTheme.typography.bodyLarge.copy(lineBreak = LineBreak.Paragraph), maxLines = 2, overflow = TextOverflow.Ellipsis)
-                if (doubleColumnDisplay) {
-                    IconButton(onClick = { actions.more(row.guid, row.profile) }, Modifier.size(36.dp)) {
-                        Icon(
-                            painterResource(R.drawable.ic_more_vert_24dp),
-                            stringResource(R.string.acc_more),
-                            Modifier.size(24.dp)
-                        )
-                    }
-                } else {
-                    IconButton(onClick = { actions.share(row.guid, row.profile) }, Modifier.size(36.dp)) {
-                        Icon(
-                            painterResource(R.drawable.ic_share_24dp),
-                            stringResource(R.string.title_configuration_share),
-                            Modifier.size(24.dp)
-                        )
-                    }
-                    IconButton(onClick = { actions.edit(row.guid, row.profile) }, Modifier.size(36.dp)) {
-                        Icon(
-                            painterResource(R.drawable.ic_edit_24dp),
-                            stringResource(R.string.acc_edit),
-                            Modifier.size(24.dp)
-                        )
-                    }
-                    IconButton(onClick = { actions.remove(row.guid, row.remarks) }, Modifier.size(36.dp)) {
-                        Icon(
-                            painterResource(R.drawable.ic_delete_24dp),
-                            stringResource(R.string.acc_delete),
-                            Modifier.size(24.dp)
-                        )
-                    }
+                // One "more" entry per row in every layout: share, edit and delete live in its dialog.
+                IconButton(onClick = { actions.more(row.guid, row.profile) }, Modifier.size(36.dp)) {
+                    Icon(
+                        painterResource(R.drawable.ic_more_vert_24dp),
+                        stringResource(R.string.acc_more),
+                        Modifier.size(24.dp)
+                    )
                 }
             }
             Spacer(modifier = Modifier.height(6.dp))

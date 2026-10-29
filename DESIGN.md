@@ -106,8 +106,13 @@ components:
   secondary-button:
     typography: "{typography.label-large}"
     width: "100%"
-  signal-mark:
-    size: "88dp"
+  connect-control:
+    size: "176dp"
+    ring: "192dp"
+    mark: "96dp"
+  server-row:
+    rounded: "{rounded.material-medium}"
+    min-height: "56dp"
   subscription-card:
     rounded: "{rounded.material-medium}"
     padding: "2dp 8dp 10dp 16dp"
@@ -161,7 +166,7 @@ The frontmatter records the default Material roles used by home/help: headline-m
 
 ## Layout
 
-The scaffold supplies system-safe insets. Home and help are vertically scrollable, centered, and capped at 560dp before internal padding. Home uses 24dp horizontal and 20dp vertical padding, with 12dp item gaps and an additional 8dp spacer before subscriptions. Help uses 24dp padding and 16dp gaps.
+The scaffold supplies system-safe insets. Home and help are vertically scrollable, centered, and capped at 560dp before internal padding. Home uses 24dp horizontal and 20dp vertical padding; the control sits 24dp below the top, 24dp above the headline, 8dp above the hint, and 32dp above the server row or import actions, with 12dp between import actions. Help uses 24dp padding and 16dp gaps.
 
 Below 600dp window width, three destinations use a bottom navigation bar. At 600dp and above, they use a navigation rail and an 88dp start allowance. Width is measured from the current window in density-independent units. System Back returns from Servers or Help to Home. Server content retains the upstream pager/list/grid and has 80dp bottom content padding; it does not inherit the home width cap.
 
@@ -178,7 +183,7 @@ Buttons inherit Material 3 capsule shapes and state treatment; there is no custo
 ## Components
 
 ### Buttons
-The connection button is filled primary with on-primary content. It is disabled without a selection unless the service is already running. The selected-server and scan actions use OutlinedButton; clipboard import uses FilledTonalButton and disables during loading; account/log actions use TextButton. Support uses Button. Native ripple, focus, disabled treatment, and button padding are inherited, with no bespoke hover animation. Do not approximate these states in Android with web CSS.
+The home connection control is the round surface described under Connect control. It is disabled without a selection unless the service is already running. The selected-server row and scan action use OutlinedButton; clipboard import uses FilledTonalButton and disables during loading; account/log actions use TextButton. Support uses Button. Native ripple, focus, disabled treatment, and button padding are inherited, with no bespoke hover animation. Do not approximate these states in Android with web CSS.
 
 ### Inputs / Fields
 The top-bar search is a single-line OutlinedTextField with transparent container and border in both focused and unfocused states. Text uses on-surface, placeholder uses on-surface-variant, cursor and selection handles use secondary, and selection background uses secondary at 40% alpha. It requests focus on entry, has the Search IME action, and shows a clear action when nonempty.
@@ -189,8 +194,16 @@ Subscription information is a compact inherited data surface, using actual parse
 ### Navigation
 Home, Servers, and Help use native NavigationBarItem or NavigationRailItem with vector icons and labels. Active indicators, interaction states, and labels follow Material defaults. The surface-colored top app bar contains the app name, drawer, search, import, and more actions. Advanced upstream destinations remain in the drawer.
 
-### Signal and status
-The home mark uses the frontmatter size and is decorative to accessibility because adjacent text expresses state. Compose applies a single tint: primary while running, on-surface-variant otherwise, overriding the vector's intrinsic two-color fills. Setup, ready/disconnected, and running text derive from selection and service state. Loading shows a linear indicator. No ornamental pulse or custom connection animation is installed.
+### Connect control and status
+The home screen has one control: a round 176dp Material `Surface` button carrying the 96dp signal mark. Running: primary fill, on-primary mark, no border. Ready: surface-container-high fill, on-surface mark, 2dp primary ring (the only amber on an idle screen, so the eye lands on the action). Setup (no server): surface-container-low, mark at 50% on-surface-variant, 1dp outline-variant ring, disabled. Fill and content colors crossfade with `animateColorAsState`; a 192dp `CircularProgressIndicator` ring wraps the control while the engine is busy. The mark's `contentDescription` is the action (Connect/Disconnect) and `stateDescription` is the state, so TalkBack reads "Connect, button, Ready when you are".
+
+Below it: headline-medium state (Connected / Ready / Add your subscription) and one body-medium line that is either the next step (tap to connect/disconnect, copy the link) or the engine's own status/test text once it has any. No ornamental pulse or custom connection animation is installed.
+
+### Server row
+Below the status: one OutlinedButton row (medium shape, 56dp min) with a body-small "Server" caption, the selected server name in body-large, and a trailing chevron; it opens the Servers tab located at the selection. The row only appears once a server is selected; before that the home shows the two import actions (FilledTonal clipboard, Outlined QR) in its place. The account TextButton is always last.
+
+### Servers tab
+The top bar shows search, import and the more menu only on this tab; home and help keep just the drawer and title. Each server row has a single more (⋮) button in every layout; share, edit and delete live in its dialog. Groups with zero servers are hidden while another group has any, so a fresh import opens on the subscription, not on the empty built-in "Default" group; after an import a server of the opened group is always selected (storage keeps the one it picked; if none is valid, the group's first server). With no servers at all the list shows one centered body-large hint instead of a blank area, and the tab's connect button is disabled, matching the home control.
 
 ## Do's and Don'ts
 
