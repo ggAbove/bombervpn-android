@@ -14,7 +14,7 @@ User request: fully working v2rayNG fork in BomberVPN style, impeccable, Materia
 Build native inputs matching pinned submodules. Run Playstore debug unit tests, compile, assemble, lint where required. Emulator: empty/import/invalid link, real VPN handshake using local fixture, disconnect/reconnect, theme, large text, navigation, persistence, activity recreation. Record unsupported checks honestly.
 
 ## Tooling
-Android SDK installing to /opt/homebrew/share/android-commandlinetools. AAR revision v26.10.21. Signing for installable debug APK is provided by Gradle; production signing requires a durable owner-controlled key.
+Android SDK installing to /opt/homebrew/share/android-commandlinetools. AAR revision v26.10.21. Debug APKs use the Gradle debug key. Release signing (2026-10-29): owner key, certificate SHA-256 b15d324a…2f0c9b, stored outside the repo (macOS Keychain + GitHub Actions secrets); see README «Релиз и подпись».
 
 ## Pre-PR verification snapshot
 - Fork: ggAbove/bombervpn-android, branch feat/bombervpn, upstream base aa4b05503a504a3f2e43818e6ee8ebf1caaa3df0.
