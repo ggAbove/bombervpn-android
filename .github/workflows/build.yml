@@ -100,6 +100,14 @@ jobs:
             echo "::error::expected 10 APKs (4 ABIs + universal for each of 2 flavors), got $count"
             exit 1
           fi
+          # Stable name for download links (sub page, mini app): releases/latest/download/BomberVPN.apk.
+          # It holds no ABI in its name, so the in-app updater never picks it.
+          universal=$(find "$dist" -name 'BomberVPN_*_universal.apk' ! -name '*fdroid*')
+          if [ "$(wc -l <<<"$universal")" -ne 1 ] || [ ! -f "$universal" ]; then
+            echo "::error::expected exactly one Play Store universal APK, got: $universal"
+            exit 1
+          fi
+          cp "$universal" "$dist/BomberVPN.apk"
           (cd "$dist" && sha256sum *.apk > SHA256SUMS.txt && cat SHA256SUMS.txt)
 
       - uses: actions/upload-artifact@v7
