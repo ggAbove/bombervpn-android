@@ -487,6 +487,7 @@ object AngConfigManager {
             LogUtil.i(AppConfig.TAG, url)
             val userAgent = it.subscription.userAgent
             val requestHeaders = it.subscription.requestHeaders
+            val deviceHeaders = SubscriptionDeviceHeaders.current()
             val proxyUsername = SettingsManager.getSocksUsername()
             val proxyPassword = SettingsManager.getSocksPassword()
 
@@ -508,6 +509,7 @@ object AngConfigManager {
                         url = url,
                         userAgent = userAgent,
                         requestHeaders = requestHeaders,
+                        deviceHeaders = deviceHeaders,
                         timeout = 15000,
                         httpPort = httpPort,
                         proxyUsername = proxyUsername,
@@ -525,7 +527,8 @@ object AngConfigManager {
                         UrlContentRequest(
                             url = url,
                             userAgent = userAgent,
-                            requestHeaders = requestHeaders
+                            requestHeaders = requestHeaders,
+                            deviceHeaders = deviceHeaders
                         ),
                         captureUsageInfo
                     )
