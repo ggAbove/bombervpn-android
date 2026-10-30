@@ -7,5 +7,7 @@ data class UrlContentRequest(
     val proxyUsername: String? = null,
     val proxyPassword: String? = null,
     val userAgent: String? = null,
-    val requestHeaders: String? = null
+    val requestHeaders: String? = null,
+    /** Sent before [requestHeaders], so a subscription's own headers can override them. */
+    val deviceHeaders: Map<String, String> = emptyMap()
 )

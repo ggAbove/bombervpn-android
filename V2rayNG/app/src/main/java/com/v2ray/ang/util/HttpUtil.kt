@@ -169,6 +169,12 @@ object HttpUtil {
 
             applyEmbeddedBasicAuthHeader(currentUrl, requestBuilder)
 
+            for ((key, value) in request.deviceHeaders) {
+                try {
+                    requestBuilder.header(key, value)
+                } catch (_: IllegalArgumentException) {
+                }
+            }
 
             val headersMap = JsonUtil.parseHeadersToMap(request.requestHeaders)
             for ((key, value) in headersMap) {
